@@ -86,6 +86,11 @@ public class UserService : IUserService
         if (user is null)
             throw new LuminaException(404,"User is not found!");
 
+        var logoFullPath = Path.Combine(WebHostEnvironmentHelper.WebRootPath, user.Image);
+
+        if (File.Exists(logoFullPath))
+            File.Delete(logoFullPath);
+
         await _repository.DeleteAsync(u => u.Id == id);
         await _repository.SaveAsync();
 

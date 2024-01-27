@@ -8,7 +8,6 @@ namespace Lumina.Service.Services.Courses;
 public class CourseService : ICourseService
 {
     private readonly ICourseRepository _repository;
-    
     private readonly IMapper _mapper;
 
     public CourseService(ICourseRepository repository, IMapper mapper)

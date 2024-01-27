@@ -3,6 +3,7 @@ using Lumina.Domain.Entities;
 using Lumina.Service.DTOs.Users;
 using Lumina.Service.DTOs.Courses;
 using Lumina.Service.DTOs.Teachers;
+using Lumina.Service.DTOs.Subjects;
 using Lumina.Service.DTOs.StudyCenters;
 
 namespace Lumina.Service.Mappers;
@@ -29,5 +30,11 @@ public class MappingProfile:Profile
         CreateMap<TeacherPostModel,Teacher>().ReverseMap();
         CreateMap<TeacherPutModel, Teacher>().ReverseMap();
         CreateMap<TeacherViewModel, Teacher>().ReverseMap();
+
+        // Subject
+        CreateMap<SubjectPostModel, Subject>().ReverseMap();
+        CreateMap<SubjectPutModel, Subject>().ReverseMap();
+        CreateMap<SubjectViewModel, Subject>().ReverseMap();
+
     }
 }
