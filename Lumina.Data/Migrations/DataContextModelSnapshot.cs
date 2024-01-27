@@ -145,6 +145,9 @@ namespace Lumina.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<long?>("ParentId")
+                        .HasColumnType("bigint");
+
                     b.Property<float>("Rating")
                         .HasColumnType("real");
 
@@ -226,6 +229,9 @@ namespace Lumina.Data.Migrations
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsAuthorizedForTeaching")
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");

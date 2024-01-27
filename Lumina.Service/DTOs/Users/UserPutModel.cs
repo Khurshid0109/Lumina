@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 
 namespace Lumina.Service.DTOs.Users;
-public class UserPutModel
+public record UserPutModel
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
