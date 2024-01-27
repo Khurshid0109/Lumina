@@ -2,8 +2,12 @@
 using Lumina.Data.IRepositories;
 using Lumina.Service.Services.Users;
 using Lumina.Service.Interfaces.Users;
-using Lumina.Service.Interfaces.StudyCenters;
+using Lumina.Service.Services.Courses;
+using Lumina.Service.Services.Teachers;
+using Lumina.Service.Interfaces.Courses;
+using Lumina.Service.Interfaces.Teachers;
 using Lumina.Service.Services.StudyCenters;
+using Lumina.Service.Interfaces.StudyCenters;
 
 namespace Lumina.Api.Extentions;
 public static class ServiceExtention
@@ -20,5 +24,13 @@ public static class ServiceExtention
         // StudyCenter
         services.AddScoped<IStudyCenterRepository, StudyCenterRepository>();
         services.AddScoped<IStudyCenterService,StudyCenterService>();
+
+        // Course
+        services.AddScoped<ICourseRepository,CourseRepository>();
+        services.AddScoped<ICourseService,CourseService>();
+
+        // Teacher
+        services.AddScoped<ITeacherRepository,TeacherRepository>();
+        services.AddScoped<ITeacherService, TeacherService>();
     }
 }

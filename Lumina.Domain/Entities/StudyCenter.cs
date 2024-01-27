@@ -16,4 +16,5 @@ public class StudyCenter:Auditable
     public string TelegramLink { get; set; }
 
     public ICollection<Course> Cources { get; set; }
+    public virtual ICollection<Teacher> Teachers { get; set; }
 }

@@ -97,8 +97,8 @@ namespace Lumina.Data.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("StartedDay")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
 
                     b.Property<long?>("StudyCenterId")
                         .HasColumnType("bigint");
@@ -171,6 +171,8 @@ namespace Lumina.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentId");
+
                     b.ToTable("StudyCenters");
                 });
 
@@ -219,6 +221,10 @@ namespace Lumina.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Experience")
                         .HasColumnType("text");
 
@@ -237,6 +243,10 @@ namespace Lumina.Data.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -387,6 +397,21 @@ namespace Lumina.Data.Migrations
                     b.ToTable("UserCourses");
                 });
 
+            modelBuilder.Entity("StudyCenterTeacher", b =>
+                {
+                    b.Property<long>("StudyCentersId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TeachersId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("StudyCentersId", "TeachersId");
+
+                    b.HasIndex("TeachersId");
+
+                    b.ToTable("StudyCenterTeacher");
+                });
+
             modelBuilder.Entity("Lumina.Domain.Entities.Book", b =>
                 {
                     b.HasOne("Lumina.Domain.Entities.Subject", "Subject")
@@ -423,6 +448,15 @@ namespace Lumina.Data.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("Lumina.Domain.Entities.StudyCenter", b =>
+                {
+                    b.HasOne("Lumina.Domain.Entities.StudyCenter", "ParentStudyCenter")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("ParentStudyCenter");
+                });
+
             modelBuilder.Entity("Lumina.Domain.Entities.UserCode", b =>
                 {
                     b.HasOne("Lumina.Domain.Entities.User", "User")
@@ -451,6 +485,21 @@ namespace Lumina.Data.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("StudyCenterTeacher", b =>
+                {
+                    b.HasOne("Lumina.Domain.Entities.StudyCenter", null)
+                        .WithMany()
+                        .HasForeignKey("StudyCentersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lumina.Domain.Entities.Teacher", null)
+                        .WithMany()
+                        .HasForeignKey("TeachersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Lumina.Domain.Entities.Course", b =>

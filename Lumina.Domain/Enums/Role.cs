@@ -2,6 +2,7 @@
 public enum Role
 {
     User,
+    Teacher,
     Admin,
     SuperAdmin
 }
