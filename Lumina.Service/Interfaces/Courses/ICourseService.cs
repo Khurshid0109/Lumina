@@ -8,6 +8,5 @@ public interface ICourseService
     Task<CourseViewModel> RetrieveByIdAsync(long id);
     Task<IEnumerable<CourseViewModel>> RetrieveAllAsync(PaginationParams @params);
     Task<CourseViewModel> AddAsync(CoursePostModel dto);
-    Task<CourseViewModel> RetrieveByEmailAsync(string email);
     Task<CourseViewModel> ModifyAsync(long id, CoursePutModel dto);
 }

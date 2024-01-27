@@ -94,6 +94,11 @@ public class StudyCenterService : IStudyCenterService
         if (center is null)
             throw new LuminaException(404, "StudyCenter is not found!");
 
+        var logoFullPath = Path.Combine(WebHostEnvironmentHelper.WebRootPath, center.Logo);
+
+        if (File.Exists(logoFullPath))
+            File.Delete(logoFullPath);
+
         await _repository.DeleteAsync(c => c.Id == id);
         await _repository.SaveAsync();
 

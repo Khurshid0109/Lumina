@@ -67,6 +67,11 @@ public class TeacherService : ITeacherService
         if (teacher is null)
             throw new LuminaException(404, "Teacher is not found!");
 
+        var logoFullPath = Path.Combine(WebHostEnvironmentHelper.WebRootPath, teacher.Image);
+
+        if (File.Exists(logoFullPath))
+            File.Delete(logoFullPath);
+
         await _repository.DeleteAsync(t=>t.Id==id);
         await _repository.SaveAsync();
 

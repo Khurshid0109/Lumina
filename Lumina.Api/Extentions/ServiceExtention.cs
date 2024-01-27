@@ -4,8 +4,12 @@ using Lumina.Service.Services.Users;
 using Lumina.Service.Interfaces.Users;
 using Lumina.Service.Services.Courses;
 using Lumina.Service.Services.Teachers;
+
+using Lumina.Service.Services.Subjects;
 using Lumina.Service.Interfaces.Courses;
 using Lumina.Service.Interfaces.Teachers;
+using Lumina.Service.Interfaces.Subjects;
+
 using Lumina.Service.Services.StudyCenters;
 using Lumina.Service.Interfaces.StudyCenters;
 
@@ -32,5 +36,10 @@ public static class ServiceExtention
         // Teacher
         services.AddScoped<ITeacherRepository,TeacherRepository>();
         services.AddScoped<ITeacherService, TeacherService>();
+
+        // Subject
+        services.AddScoped<ISubjectRepository, SubjectRepository>();
+        services.AddScoped<ISubjectService, SubjectService>();
+
     }
 }
