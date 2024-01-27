@@ -1,11 +1,12 @@
-﻿using Lumina.Domain.Commons;
+﻿using Lumina.Domain.Enums;
+using Lumina.Domain.Commons;
 
 namespace Lumina.Domain.Entities;
 public class Course:Auditable
 { 
     public string CourseName { get; set; }
     public float Rating { get; set; }
-    public DateTime StartedDay { get; set; }
+    public Status Status { get; set; }
     public DateTime StartTime { get; set; }
     public int Capacity { get; set; }
     public int AvailablePlaces { get; set; }

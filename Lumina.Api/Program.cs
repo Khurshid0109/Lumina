@@ -4,7 +4,8 @@ using Lumina.Data.DbContexts;
 using Lumina.Service.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Lumina.Service.Helpers.Media;
-using Microsoft.AspNetCore.Diagnostics;
+using Lumina.Api.Middlewares;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,13 @@ var logger = new LoggerConfiguration()
    .ReadFrom.Configuration(builder.Configuration)
    .Enrich.FromLogContext()
    .CreateLogger();
+
+//Fix the Cycle
+//builder.Services.AddControllers()
+//     .AddNewtonsoftJson(options =>
+//     {
+//         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+//     });
 
 //for logging  data
 builder.Logging.AddConsole();
@@ -40,10 +48,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
+
+app.UseCors(cors =>
+    cors.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+
 app.UseStaticFiles();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+app.MapGet("/", () => Results.Redirect("/swagger"));
 
 app.UseAuthorization();
 

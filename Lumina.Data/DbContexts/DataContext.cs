@@ -1,4 +1,5 @@
-﻿using Lumina.Data.Helpers;
+﻿using Lumina.Data.Configurations;
+using Lumina.Data.Helpers;
 using Lumina.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,5 +29,7 @@ public class DataContext:DbContext
 
         modelBuilder.Entity<User>()
             .HasQueryFilter(user => user.IsVerified);
+
+        modelBuilder.ApplyConfiguration(new StudyCenterConfiguration());
     }
 }
