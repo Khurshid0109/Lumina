@@ -1,7 +1,7 @@
 ﻿using Lumina.Domain.Enums;
 
 namespace Lumina.Service.DTOs.Users;
-public class UserViewModel
+public record UserViewModel
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

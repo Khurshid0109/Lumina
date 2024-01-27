@@ -4,6 +4,7 @@ using Lumina.Data.DbContexts;
 using Lumina.Service.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Lumina.Service.Helpers.Media;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +39,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

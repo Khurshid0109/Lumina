@@ -11,6 +11,7 @@ public class Teacher:Auditable
     public string? Experience { get; set; }
     public string StudyArea { get; set; }
     public string PhoneNumber { get; set; }
+    public bool IsAuthorizedForTeaching { get; set; } = false;
 
     public ICollection<Course> Courses { get; set; }
 }
